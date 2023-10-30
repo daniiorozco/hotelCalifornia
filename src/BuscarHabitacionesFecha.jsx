@@ -1,15 +1,15 @@
-import {  useState , useEffect} from "react";
+import { useNavigate, Link } from 'react-router-dom';
+import { useState, useEffect } from "react";
 import axios from "axios";
-import {useNavigate,  Link } from 'react-router-dom';
 import DataTable from "react-data-table-component";
 
-const url = 'http://127.0.0.1:8080/habitaciones/precio/';
+const url = 'http://localhost:8080/habitaciones/fecha/';
 
-const BuscarHabitacionPrecio = () =>{
+const BuscarHabitacionesFecha = () => {
 
     const navigate = useNavigate();
     const [habitaciones, setHabitaciones] = useState([]);
-    const [precio, setPrecio] = useState(null);
+    const [fecha, setFecha] = useState(null);
 
     useEffect(() => {
 
@@ -19,12 +19,12 @@ const BuscarHabitacionPrecio = () =>{
             navigate("/");
         } else {
             axios.defaults.headers.common['Authorization'] = `${token}`;
-           
+
         }
     }, []);
 
     const getHabitaciones = () => {
-        let data = parseFloat(precio);
+        let data = fecha;
         axios.get(url + data).then((response) => {
             setHabitaciones(response.data);
             console.log(response.data);
@@ -32,29 +32,32 @@ const BuscarHabitacionPrecio = () =>{
             console.log(error.response.data.message);
         });
     }
-    const handleChange = ({ target: { value } }) => {
-        setPrecio(value);
-        console.log(id);
-    }
 
-    const handleBuscar = ()=>{
+    const handleChange = ({ target: { value } }) => {
+        setFecha(value);
+    }
+    const handleBuscar = () => {
         getHabitaciones();
     }
-
     // configuracion de la data-table
     const columnas = [
         {
-            name: 'N° Habitación',
+            name: 'Número habitación',
             selector: row => row.numero_habitacion,
             sortable: true
         },
         {
-            name: 'precio',
+            name: 'Estado',
+            selector: row => row.estado,
+            sortable: true
+        },
+        {
+            name: 'Precio',
             selector: row => row.precio,
             sortable: true
         },
         {
-            
+
             ignoreRowClick: true,
             allowOverflow: true,
             button: true,
@@ -67,23 +70,22 @@ const BuscarHabitacionPrecio = () =>{
         selectAllRowsItem: true,
         selectAllRowsItemText: 'Todos'
     }
-    return(
+
+    return (
         <>
-        <h2>Buscar Habitaciòn por precio</h2>
-        <div>
-            <label htmlFor="precio" className="mx-4">Ingrese el precio : </label>
-            <input type="number" name="precio" id="precio" onChange={handleChange} value={precio} className="bg-white text-black mx-2"/>
+            <h2> buscar todas las Habitaciones por fecha</h2>
+
+            <input type="date" name="fecha" id="fecha" value={fecha} onChange={handleChange} />
             <button onClick={handleBuscar}>Buscar</button>
             <DataTable
-                    columns={columnas}
-                    data={habitaciones}
-                    title="Lista de Habitaciones"
-                    pagination
-                    paginationComponentOptions={PaginacionOpciones} />
-        </div>
-        <div><Link to="/Clientes">Volver</Link> </div>
+                columns={columnas}
+                data={habitaciones}
+                title="Lista de Habitaciones"
+                pagination
+                paginationComponentOptions={PaginacionOpciones} />
+            <div><Link to="/Clientes">Volver</Link> </div>
         </>
     )
 }
 
-export default BuscarHabitacionPrecio;
+export default BuscarHabitacionesFecha;

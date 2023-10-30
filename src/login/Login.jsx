@@ -37,7 +37,7 @@ const Login = () => {
                 throw new Error('Credenciales inválidas');
             }
         } catch (error) {
-            console.log(error.message);
+            console.log(error.response.data);
         }
     };
 

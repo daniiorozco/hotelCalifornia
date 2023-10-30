@@ -1,6 +1,6 @@
 import {  useState , useEffect} from "react";
 import axios from "axios";
-import {  Link } from 'react-router-dom';
+import {useNavigate,  Link } from 'react-router-dom';
 import DataTable from "react-data-table-component";
 
 
@@ -8,6 +8,7 @@ const urlHabitacion = 'http://localhost:8080/habitaciones/';
 
 const BusquedaAdmin = () =>{
 
+    const navigate = useNavigate();
     const [habitaciones, setHabitaciones] = useState([]);
     const [id, setId] = useState(null);
 
@@ -34,7 +35,6 @@ const BusquedaAdmin = () =>{
     }
     const handleChange = ({ target: { value } }) => {
         setId(value);
-        console.log(id);
     }
 
     const handleBuscar = ()=>{
@@ -84,7 +84,7 @@ const BusquedaAdmin = () =>{
     }
     return(
         <>
-        <h2>Busqueda Administrativa</h2>
+        <h2>Busqueda de reservas por Id de habitación</h2>
 
         <div>
             <label htmlFor="idHabitacion" className="mx-4">IdHabitacion : </label>

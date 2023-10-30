@@ -9,7 +9,7 @@ const urlReserva = 'http://localhost:8080/reservas';
 
 const ReservaHabitacion = () => {
 
-    
+
     const [p_id_cliente, setIdCliente] = useState(0);
     const [p_id_habitacion, setIdHabitacion] = useState(0);
     const [p_fecha_inicio_hospedaje, setFechaDesde] = useState(null);
@@ -39,21 +39,18 @@ const ReservaHabitacion = () => {
 
     const handleHabitacionChange = (e) => {
         setIdHabitacion(e.target.value)
-        console.log(e.target.value);
-     };
+    };
 
     const handleFechaDesdeChange = (e) => {
         setFechaDesde(e.target.value);
-        console.log(e.target.value);
     };
 
     const handleFechaHastaChange = (e) => {
-       setFechaHasta(e.target.value)
-       console.log(e.target.value);
+        setFechaHasta(e.target.value)
     };
 
-    let crearReserva = async ()=>{
-      await axios.post(urlReserva,{
+    let crearReserva = async () => {
+        await axios.post(urlReserva, {
             p_id_cliente,
             p_id_habitacion,
             p_fecha_inicio_hospedaje,
@@ -61,12 +58,12 @@ const ReservaHabitacion = () => {
         }).then((response) => {
             let data = response.data;
             console.log(data);
-        }).catch(error =>{
+        }).catch(error => {
             console.log(error.response);
         });
     }
 
-    const handleSubmit = (e)=>{
+    const handleSubmit = (e) => {
         e.preventDefault();
         crearReserva();
     }
@@ -76,7 +73,7 @@ const ReservaHabitacion = () => {
             <h2>Reservar Habitación</h2>
             <Form className='mt-4' onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="p_id_habitacion">
-                    <input type="number" name='p_id_cliente' value={p_id_cliente} hidden/>
+                    <input type="number" name='p_id_cliente' value={p_id_cliente} hidden />
                     <Form.Select onChange={handleHabitacionChange} name="p_id_habitacion" value={p_id_habitacion}>
                         <option value="0">seleccione la Habitacion</option>
                         {habitaciones.map((habitacion) => (
@@ -85,14 +82,14 @@ const ReservaHabitacion = () => {
                     </Form.Select>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="p_fecha_inicio_hospedaje">
-                <input type="date" name="p_fecha_inicio_hospedaje" id="p_fecha_inicio_hospedaje" value={p_fecha_inicio_hospedaje} onChange={handleFechaDesdeChange} />
+                    <input type="date" name="p_fecha_inicio_hospedaje" id="p_fecha_inicio_hospedaje" value={p_fecha_inicio_hospedaje} onChange={handleFechaDesdeChange} />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="p_fecha_inicio_hospedaje">
-                <input type="date" name="p_fecha_fin_hospedaje" id="p_fecha_fin_hospedaje" value={p_fecha_fin_hospedaje} onChange={handleFechaHastaChange} />
+                    <input type="date" name="p_fecha_fin_hospedaje" id="p_fecha_fin_hospedaje" value={p_fecha_fin_hospedaje} onChange={handleFechaHastaChange} />
                 </Form.Group>
                 <Button className="my-4" type="submit">Reservar</Button>
             </Form>
-            <div><button className='mb-4'><Link to="/Clientes">Volver</Link></button> </div>
+            <div><Link to="/Clientes">Volver</Link> </div>
 
         </>
     )

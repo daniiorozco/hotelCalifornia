@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import { Link } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 
 const url = 'http://localhost:8080/habitacionesAdministraccion'
 const urlHabitacion = 'http://localhost:8080/habitaciones/';
@@ -12,6 +12,7 @@ const urlHabitacion = 'http://localhost:8080/habitaciones/';
 
 const ListHabitaciones = () => {
 
+    const navigate = useNavigate();
     const [habitaciones, setHabitaciones] = useState([]);
     const [habitacion, setHabitacion] = useState({});
     const [listUpdateHabitacion, setListUpdateHabitacion] = useState(false);

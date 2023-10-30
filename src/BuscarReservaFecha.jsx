@@ -1,4 +1,4 @@
-import {  Link } from 'react-router-dom';
+import {  useNavigate,Link } from 'react-router-dom';
 import {  useState , useEffect} from "react";
 import axios from "axios";
 import DataTable from "react-data-table-component";
@@ -7,6 +7,7 @@ const url = 'http://localhost:8080/reservas/fecha/';
 
 const BuscarReservaFecha = () =>{
 
+    const navigate = useNavigate();
     const [reservas, setReservas] = useState([]);
     const [fecha, setFecha] = useState(null);
 
@@ -77,7 +78,7 @@ const BuscarReservaFecha = () =>{
     }
 
     return(<>
-    <h2> buscar por fecha</h2>
+    <h2> buscar reservas por fecha</h2>
 
     <input type="date" name="fecha" id="fecha" value={fecha} onChange={handleChange} />
     <button onClick={handleBuscar}>Buscar</button>

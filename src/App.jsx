@@ -13,6 +13,7 @@ import BusquedaAdmin from './BusquedaAdmin';
 import BuscarReservaFecha from './BuscarReservaFecha';
 import BuscarHabitacionPrecio from './BuscarHabitacionPrecio';
 import BuscarRangoFechas from './BuscarRangoFechas';
+import BuscarHabitacionesFecha from './BuscarHabitacionesFecha';
 
 
 
@@ -38,6 +39,8 @@ function App() {
       <Route path='/Busqueda' element={<BusquedaCliente />}/>
       <Route path='/BusquedaPrecio' element={<BuscarHabitacionPrecio />}/>
       <Route path='/Busquedafechas' element={<BuscarRangoFechas />}/>
+      <Route path='/BusquedaHabitacion' element={<BuscarHabitacionesFecha />}/>
+
      </Routes> 
     </>
   )

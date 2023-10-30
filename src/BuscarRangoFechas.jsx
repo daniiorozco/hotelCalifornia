@@ -1,11 +1,13 @@
-import {  Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import {  useState , useEffect} from "react";
 import axios from "axios";
 import DataTable from "react-data-table-component";
 
-const url = 'http://localhost:8080/habitaciones?'
+const url = 'http://localhost:8080/habitaciones?';
+
 const BuscarRangoFechas = () =>{
 
+    const navigate = useNavigate();
     const [habitaciones, setHabitaciones] = useState([]);
     const [p_fecha_inicio_hospedaje, setFechaDesde] = useState(null);
     const [p_fecha_fin_hospedaje, setFechaHasta] = useState(null);
